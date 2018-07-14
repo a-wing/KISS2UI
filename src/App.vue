@@ -12,15 +12,19 @@
 
     <mu-container>
       <mu-paper :z-depth="1">
-        <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 6)">
+        <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)">
           <template slot-scope="scope">
-            <td>{{scope.row.pkgname}}</td>
-            <td class="is-right">{{scope.row.pkgver}}</td>
-            <td class="is-right">{{scope.row.latest_build_time}}</td>
-            <td class="is-right">{{scope.row.building_ok}}</td>
-            <td class="is-right">{{ scope.row.building_time + ' s'}}</td>
+            <td>{{ scope.row.pkgname }}</td>
+            <td class="is-right">{{ scope.row.pkgver }}</td>
+            <td class="is-right">{{ scope.row.latest_build_time }}</td>
+            <td class="is-right">
+              <mu-chip v-if="scope.row.building_ok" color="green" chip>successful</mu-chip>
+              <mu-chip v-else color="red" chip>failed</mu-chip>
+            </td>
+            <td class="is-right">{{ scope.row.building_time + 's'}}</td>
             <td class="is-right">{{ scope.row.successful_counts }}</td>
             <td class="is-right">{{ scope.row.failed_counts }}</td>
+            <td class="is-right">{{ scope.row.successful_counts / (scope.row.successful_counts + scope.row.failed_counts)*100 + '%' }}</td>
           </template>
         </mu-data-table>
       </mu-paper>
@@ -42,11 +46,12 @@ export default {
       columns: [
         { title: 'PkgName', name: 'pkgname', align: 'center' },
         { title: 'PkgVer', name: 'pkgver', align: 'center', sortable: true },
-        { title: 'Batest Build Time', name: 'latest_build_time', align: 'center', sortable: true },
-        { title: 'building_ok', name: 'building_ok', align: 'center', sortable: true },
+        { title: 'Latest Build Time', name: 'latest_build_time', align: 'center', sortable: true },
+        { title: 'Building Status', name: 'building_ok', align: 'center', sortable: true },
         { title: 'Building Time (s)', name: 'building_time', align: 'center', sortable: true },
         { title: 'Successful Counts', name: 'successful_counts', align: 'center', sortable: true },
-        { title: 'Failed Counts', name: 'failed_counts', align: 'center', sortable: true }
+        { title: 'Failed Counts', name: 'failed_counts', align: 'center', sortable: true },
+        { title: 'Success rate', align: 'center' }
       ],
       list: []
     }
