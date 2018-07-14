@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!--img src="./assets/logo.png"-->
     <h1>{{ msg }}</h1>
     <h2>A</h2>
   </div>
@@ -13,35 +13,31 @@ export default {
     return {
       msg: 'Keep It Simple, Stupid To You UI'
     }
+  },
+  created() {
+    this.getLatest()
+  },
+  methods: {
+    getLatest() {
+      //let url = location.protocol + "//" + location.host + "/config.json"
+      //let url = location.protocol + "//" + location.host + "/package"
+      let url = "http://localhost:3000/packages"
+      console.log(url)
+      this.$http.get(url)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  body {
+    margin: 0;
+    padding: 0;
+  }
 </style>
