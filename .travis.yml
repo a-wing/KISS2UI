@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+  - "10.6.0"
+
+addons:
+  ssh_known_hosts: build.archlinuxcn.org
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+script:
+  - sed -i 's#http://localhost:3000/packages#/api/packages#g' src/App.vue
+  - sed -i 's#/dist/build.js#dist/build.js#g' index.html
+  - yarn install
+  - yarn build
+
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_b9fe8a84dafa_key -iv $encrypted_b9fe8a84dafa_iv -in deploy_rsa.enc -out deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 deploy_rsa
+  - ssh-add deploy_rsa
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: cat .deploylist | xargs tar -cJf - | ssh a-wing@build.archlinuxcn.org 'mkdir -p kiss2ui && cd kiss2ui && tar -xJf - && cp -r * /srv/packages/ && cd .. && rm -r kiss2ui/'
+    on:
+      branch: master
+
