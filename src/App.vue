@@ -21,10 +21,9 @@
               <mu-chip v-if="scope.row.building_ok" color="green" chip>successful</mu-chip>
               <mu-chip v-else color="red" chip>failed</mu-chip>
             </td>
-            <td class="is-right">{{ scope.row.building_time + 's'}}</td>
             <td class="is-right">{{ scope.row.successful_counts }}</td>
             <td class="is-right">{{ scope.row.failed_counts }}</td>
-            <td class="is-right">{{ scope.row.successful_counts / (scope.row.successful_counts + scope.row.failed_counts)*100 + '%' }}</td>
+            <td class="is-right">{{ scope.row.building_time + 's'}}</td>
           </template>
         </mu-data-table>
       </mu-paper>
@@ -48,10 +47,9 @@ export default {
         { title: 'PkgVer', name: 'pkgver', align: 'center', sortable: true },
         { title: 'Latest Build Time', name: 'latest_build_time', align: 'center', sortable: true },
         { title: 'Building Status', name: 'building_ok', align: 'center', sortable: true },
-        { title: 'Building Time (s)', name: 'building_time', align: 'center', sortable: true },
         { title: 'Successful Counts', name: 'successful_counts', align: 'center', sortable: true },
         { title: 'Failed Counts', name: 'failed_counts', align: 'center', sortable: true },
-        { title: 'Success rate', align: 'center' }
+        { title: 'Building Time (s)', name: 'building_time', align: 'center', sortable: true }
       ],
       list: []
     }
@@ -64,7 +62,6 @@ export default {
       this.list = this.list.sort((a, b) => order === 'asc' ? a[name] - b[name] : b[name] - a[name]);
     },
     getLatest() {
-      //let url = location.protocol + "//" + location.host + "/config.json"
       //let url = location.protocol + "//" + location.host + "/package"
       let url = "http://localhost:3000/packages"
       console.log(url)
