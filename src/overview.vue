@@ -1,18 +1,22 @@
 <template>
-  <div id="app">
-    <!--img src="./assets/logo.png"-->
-    <mu-appbar style="width: 100%;" color="primary">
-      {{ msg }}
-      <mu-menu slot="right">
-        <mu-button flat>Arch Linux CN</mu-button>
-      </mu-menu>
-    </mu-appbar>
-
-    <br/>
-
-    <router-view></router-view>
-
-  </div>
+  <mu-container>
+    <mu-paper :z-depth="1">
+      <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)">
+        <template slot-scope="scope">
+          <td>{{ scope.row.pkgname }}</td>
+          <td class="is-right">{{ scope.row.pkgver }}</td>
+          <td class="is-right">{{ scope.row.latest_build_time }}</td>
+          <td class="is-right">
+            <mu-chip v-if="scope.row.building_ok" color="green" chip>successful</mu-chip>
+            <mu-chip v-else color="red" chip>failed</mu-chip>
+          </td>
+          <td class="is-right">{{ scope.row.successful_counts }}</td>
+          <td class="is-right">{{ scope.row.failed_counts }}</td>
+          <td class="is-right">{{ scope.row.building_time + 's'}}</td>
+        </template>
+      </mu-data-table>
+    </mu-paper>
+  </mu-container>
 </template>
 
 <script>
@@ -20,7 +24,6 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Keep It Simple, Stupid To You UI',
       sort: {
         name: '',
         order: 'asc'
@@ -38,7 +41,7 @@ export default {
     }
   },
   created() {
-    //this.getLatest()
+    this.getLatest()
   },
   methods: {
     handleSortChange ({name, order}) {
