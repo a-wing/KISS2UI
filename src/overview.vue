@@ -1,7 +1,7 @@
 <template>
   <mu-container>
     <mu-paper :z-depth="1">
-      <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)">
+      <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)" @row-click=detail >
         <template slot-scope="scope">
           <td>{{ scope.row.pkgname }}</td>
           <td class="is-right">{{ scope.row.pkgver }}</td>
@@ -44,17 +44,20 @@ export default {
     this.getLatest()
   },
   methods: {
+    detail (index, row, event) {
+       this.$router.push(row.pkgname)
+    },
     handleSortChange ({name, order}) {
       this.list = this.list.sort((a, b) => order === 'asc' ? a[name] - b[name] : b[name] - a[name]);
     },
     getLatest() {
       //let url = location.protocol + "//" + location.host + "/package"
-      let url = "http://localhost:3000/packages"
+      let url = global.pre + "/packages/"
       console.log(url)
       this.$http.get(url)
       .then((response) => {
         this.list = response.data
-        console.log(response.data)
+       // console.log(response.data)
       })
       .catch((error) => {
         console.log(error)
