@@ -19,7 +19,7 @@
       <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)">
         <template slot-scope="scope">
           <td class="is-right">{{ scope.row.pkgver }}</td>
-          <td class="is-right">{{ scope.row.latest_build_time }}</td>
+          <td class="is-right">{{ (new Date(scope.row.latest_build_time)).toLocaleString() }}</td>
           <td class="is-right">
             <mu-chip v-if="scope.row.building_ok" color="green" chip>successful</mu-chip>
             <mu-chip v-else color="red" chip>failed</mu-chip>

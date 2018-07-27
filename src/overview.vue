@@ -5,7 +5,7 @@
         <template slot-scope="scope">
           <td>{{ scope.row.pkgname }}</td>
           <td class="is-right">{{ scope.row.pkgver }}</td>
-          <td class="is-right">{{ scope.row.latest_build_time }}</td>
+          <td class="is-right">{{ (new Date(scope.row.latest_build_time)).toLocaleString() }}</td>
           <td class="is-right">
             <mu-chip v-if="scope.row.building_ok" color="green" chip>successful</mu-chip>
             <mu-chip v-else color="red" chip>failed</mu-chip>
