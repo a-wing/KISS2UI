@@ -20,42 +20,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Keep It Simple, Stupid To You UI',
-      sort: {
-        name: '',
-        order: 'asc'
-      },
-      columns: [
-        { title: 'PkgName', name: 'pkgname', align: 'center' },
-        { title: 'PkgVer', name: 'pkgver', align: 'center', sortable: true },
-        { title: 'Latest Build Time', name: 'latest_build_time', align: 'center', sortable: true },
-        { title: 'Building Status', name: 'building_ok', align: 'center', sortable: true },
-        { title: 'Successful Counts', name: 'successful_counts', align: 'center', sortable: true },
-        { title: 'Failed Counts', name: 'failed_counts', align: 'center', sortable: true },
-        { title: 'Building Time (s)', name: 'building_time', align: 'center', sortable: true }
-      ],
-      list: []
-    }
-  },
-  created() {
-    //this.getLatest()
-  },
-  methods: {
-    handleSortChange ({name, order}) {
-      this.list = this.list.sort((a, b) => order === 'asc' ? a[name] - b[name] : b[name] - a[name]);
-    },
-    getLatest() {
-      //let url = location.protocol + "//" + location.host + "/package"
-      let url = "http://localhost:3000/packages"
-      console.log(url)
-      this.$http.get(url)
-      .then((response) => {
-        this.list = response.data
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+      msg: 'Keep It Simple, Stupid To You UI'
     }
   }
 }
