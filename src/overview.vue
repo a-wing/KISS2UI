@@ -12,8 +12,9 @@
       </mu-flex>
     </div>
     <div v-else>
+        <mu-text-field full-width label="Input Pkgname (Support RegExp)" v-model="keywords"></mu-text-field>
     <mu-paper :z-depth="1">
-      <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)" @row-click=detail >
+      <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.filter(item => item.pkgname.match(this.keywords)).slice(0, 3000)" @row-click=detail >
         <template slot-scope="scope">
           <td>{{ scope.row.pkgname }}</td>
           <td class="is-right">{{ scope.row.pkgver }}</td>
@@ -36,6 +37,7 @@
 export default {
   data () {
     return {
+      keywords: '',
       sort: {
         name: '',
         order: 'asc'
@@ -70,6 +72,7 @@ export default {
       .then((response) => {
         this.list = response.data
        // console.log(response.data)
+        //console.log(response.data.filter(item => item.pkgname.match(this.keywords)))
       })
       .catch((error) => {
         console.log(error)
