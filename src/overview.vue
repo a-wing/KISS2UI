@@ -45,11 +45,11 @@ export default {
       columns: [
         { title: 'PkgName', name: 'pkgname', align: 'center' },
         { title: 'PkgVer', name: 'pkgver', align: 'center', sortable: true },
-        { title: 'Latest Build Time', name: 'latest_build_time', align: 'center', sortable: true },
-        { title: 'Building Status', name: 'building_ok', align: 'center', sortable: true },
-        { title: 'Successful Counts', name: 'successful_counts', align: 'center', sortable: true },
-        { title: 'Failed Counts', name: 'failed_counts', align: 'center', sortable: true },
-        { title: 'Building Time (s)', name: 'building_time', align: 'center', sortable: true }
+        { title: 'Latest Build Time', width: 180, name: 'latest_build_time', align: 'center', sortable: true },
+        { title: 'Building Status', width: 120, name: 'building_ok', align: 'center', sortable: true },
+        { title: 'Successful', width: 80, name: 'successful_counts', align: 'center', sortable: true },
+        { title: 'Failed', width: 80, name: 'failed_counts', align: 'center', sortable: true },
+        { title: 'Time', width: 100, name: 'building_time', align: 'center', sortable: true }
       ],
       list: []
     }
