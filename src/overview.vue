@@ -1,5 +1,17 @@
 <template>
   <mu-container>
+    <div v-if="!list[0]">
+      <mu-flex justify-content="center">
+        <mu-circular-progress color="DodgerBlue" :stroke-width="12" :size="100"></mu-circular-progress>
+        <mu-circular-progress color="Black" :stroke-width="12" :size="100"></mu-circular-progress>
+        <mu-circular-progress color="Red" :stroke-width="12" :size="100"></mu-circular-progress>
+      </mu-flex>
+      <mu-flex justify-content="center">
+        <mu-circular-progress color="Coral" :stroke-width="12" :size="100"></mu-circular-progress>
+        <mu-circular-progress color="Green" :stroke-width="12" :size="100"></mu-circular-progress>
+      </mu-flex>
+    </div>
+    <div v-else>
     <mu-paper :z-depth="1">
       <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)" @row-click=detail >
         <template slot-scope="scope">
@@ -16,6 +28,7 @@
         </template>
       </mu-data-table>
     </mu-paper>
+    </div>
   </mu-container>
 </template>
 
