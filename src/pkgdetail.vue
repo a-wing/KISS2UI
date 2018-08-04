@@ -1,20 +1,13 @@
 <template>
   <mu-container>
+    <pkg-card :pkg=overview ></pkg-card>
 
-    <mu-alert v-if="overview.successful_counts / (overview.successful_counts + overview.failed_counts) >= 0.8" color="success">
-      {{ msg }}
-    </mu-alert>
-    <mu-alert v-else-if="overview.successful_counts / (overview.successful_counts + overview.failed_counts) >= 0.5" color="warning">
-      {{ msg }}
-    </mu-alert>
-    <mu-alert v-else-if="overview.successful_counts / (overview.successful_counts + overview.failed_counts) >= 0.2" color="info" >
-      {{ msg }}
-    </mu-alert>
-    <mu-alert v-else color="error" >
-      {{ msg }}
-    </mu-alert>
+    <mu-alert v-if="overview.successful_counts / (overview.successful_counts + overview.failed_counts) >= 0.8" color="success"></mu-alert>
+    <mu-alert v-else-if="overview.successful_counts / (overview.successful_counts + overview.failed_counts) >= 0.5" color="warning"></mu-alert>
+    <mu-alert v-else-if="overview.successful_counts / (overview.successful_counts + overview.failed_counts) >= 0.2" color="info" ></mu-alert>
+    <mu-alert v-else color="error" ></mu-alert>
+    <br/>
 
-  <div>Package: {{ $route.params.pkgname }}</div>
     <mu-paper :z-depth="1">
       <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.slice(0, 3000)">
         <template slot-scope="scope">
@@ -32,6 +25,8 @@
 </template>
 
 <script>
+import Pkgcard from './pkgcard.vue'
+
 export default {
   data () {
     return {
@@ -49,6 +44,9 @@ export default {
       overview: {},
       list: []
     }
+  },
+  components: {
+    'pkg-card': Pkgcard
   },
   created() {
     this.getLatest()
