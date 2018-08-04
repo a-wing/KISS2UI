@@ -4,7 +4,7 @@
     <mu-appbar style="width: 100%;" color="primary">
       {{ msg }}
       <mu-menu slot="right">
-        <mu-button flat>Arch Linux CN</mu-button>
+        <mu-button flat to="/" >Arch Linux CN</mu-button>
       </mu-menu>
     </mu-appbar>
 
