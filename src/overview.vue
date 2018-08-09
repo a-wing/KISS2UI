@@ -19,7 +19,10 @@
       <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="list.filter(item => item.pkgname.match(this.keywords)).slice(0, 3000)" @row-click=detail >
         <template slot-scope="scope">
           <td>{{ scope.row.pkgname }}</td>
-          <td class="is-right">{{ scope.row.pkgver }}</td>
+          <td class="is-right">{{ scope.row.pkgver }}
+            <!--mark the latest build wave differently in the last eight hours, Maybe 8 hours -->
+            <mu-chip v-if="(Date.now() - new Date(scope.row.latest_build_time)) < 19200000" color="deepOrange500" chip>new</mu-chip>
+          </td>
           <td class="is-right">{{ (new Date(scope.row.latest_build_time)).toLocaleString() }}</td>
           <td class="is-right">
             <mu-chip v-if="scope.row.building_ok" color="green" chip>successful</mu-chip>
