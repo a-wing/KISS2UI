@@ -17,7 +17,7 @@
             <mu-chip v-if="scope.row.building_ok" color="green" chip>successful</mu-chip>
             <mu-chip v-else color="red" chip>failed</mu-chip>
           </td>
-          <td class="is-right">{{ scope.row.building_time + 's'}}</td>
+          <td class="is-right">{{ humanFriendlyTime(scope.row.building_time) }}</td>
         </template>
       </mu-data-table>
     </mu-paper>
@@ -25,15 +25,12 @@
 </template>
 
 <script>
+import Base from './BasePkg.vue'
 import Pkgcard from './pkgcard.vue'
 
 export default {
   data () {
     return {
-      sort: {
-        name: '',
-        order: 'asc'
-      },
       columns: [
         { title: 'PkgVer', name: 'pkgver', align: 'center', sortable: true },
         { title: 'Latest Build Time', name: 'latest_build_time', align: 'center', sortable: true },
@@ -48,13 +45,8 @@ export default {
   components: {
     'pkg-card': Pkgcard
   },
-  created() {
-    this.getLatest()
-  },
+  extends: Base,
   methods: {
-    handleSortChange ({name, order}) {
-      this.list = this.list.sort((a, b) => order === 'asc' ? a[name] - b[name] : b[name] - a[name]);
-    },
     getLatest() {
       //let url = "http://localhost:3000/packages/" + this.$route.params.pkgname
       let url = global.pre + "/packages/" + this.$route.params.pkgname

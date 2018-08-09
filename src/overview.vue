@@ -27,7 +27,7 @@
           </td>
           <td class="is-right">{{ scope.row.successful_counts }}</td>
           <td class="is-right">{{ scope.row.failed_counts }}</td>
-          <td class="is-right">{{ scope.row.building_time + 's'}}</td>
+          <td class="is-right">{{ humanFriendlyTime(scope.row.building_time) }}</td>
         </template>
       </mu-data-table>
     </mu-paper>
@@ -36,14 +36,12 @@
 </template>
 
 <script>
+import Base from './BasePkg.vue'
+
 export default {
   data () {
     return {
       keywords: '',
-      sort: {
-        name: '',
-        order: 'asc'
-      },
       columns: [
         { title: 'PkgName', name: 'pkgname', align: 'center' },
         { title: 'PkgVer', name: 'pkgver', align: 'center', sortable: true },
@@ -56,15 +54,10 @@ export default {
       list: []
     }
   },
-  created() {
-    this.getLatest()
-  },
+  extends: Base,
   methods: {
     detail (index, row, event) {
        this.$router.push(row.pkgname)
-    },
-    handleSortChange ({name, order}) {
-      this.list = this.list.sort((a, b) => order === 'asc' ? a[name] - b[name] : b[name] - a[name]);
     },
     getLatest() {
       //let url = location.protocol + "//" + location.host + "/package"
