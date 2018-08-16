@@ -1,15 +1,7 @@
 <template>
   <mu-container>
     <div v-if="!list[0]">
-      <mu-flex justify-content="center">
-        <mu-circular-progress color="DodgerBlue" :stroke-width="12" :size="100"></mu-circular-progress>
-        <mu-circular-progress color="Black" :stroke-width="12" :size="100"></mu-circular-progress>
-        <mu-circular-progress color="Red" :stroke-width="12" :size="100"></mu-circular-progress>
-      </mu-flex>
-      <mu-flex justify-content="center">
-        <mu-circular-progress color="Coral" :stroke-width="12" :size="100"></mu-circular-progress>
-        <mu-circular-progress color="Green" :stroke-width="12" :size="100"></mu-circular-progress>
-      </mu-flex>
+      <loading/>
     </div>
     <div v-else>
 
@@ -40,6 +32,7 @@
 
 <script>
 import Base from './BasePkg.vue'
+import Loading from './components/loading.vue'
 
 export default {
   data () {
@@ -58,6 +51,9 @@ export default {
     }
   },
   extends: Base,
+  components: {
+    'loading': Loading
+  },
   methods: {
     detail (index, row, event) {
        this.$router.push(row.pkgname)

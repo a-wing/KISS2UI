@@ -1,5 +1,9 @@
 <template>
   <mu-container>
+    <div v-if="!list[0]">
+      <loading/>
+    </div>
+    <div v-else>
     <pkg-card :pkg=overview ></pkg-card>
 
     <mu-alert v-if="overview.successful_counts / (overview.successful_counts + overview.failed_counts) >= 0.8" color="success"></mu-alert>
@@ -21,12 +25,14 @@
         </template>
       </mu-data-table>
     </mu-paper>
+    </div>
   </mu-container>
 </template>
 
 <script>
 import Base from './BasePkg.vue'
 import Pkgcard from './pkgcard.vue'
+import Loading from './components/loading.vue'
 
 export default {
   data () {
@@ -43,6 +49,7 @@ export default {
     }
   },
   components: {
+    'loading': Loading,
     'pkg-card': Pkgcard
   },
   extends: Base,
