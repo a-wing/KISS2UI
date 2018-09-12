@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import Base from './BasePkg.vue'
-import Pkgcard from './pkgcard.vue'
+import Base from './lib/BasePkg.vue'
+import Pkgcard from './components/pkgcard.vue'
 import Loading from './components/loading.vue'
 
 export default {

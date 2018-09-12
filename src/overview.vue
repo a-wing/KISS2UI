@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Base from './BasePkg.vue'
+import Base from './lib/BasePkg.vue'
 import Loading from './components/loading.vue'
 
 export default {
