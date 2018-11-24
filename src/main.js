@@ -24,7 +24,7 @@ const router = new VueRouter({
   routes
 })
 
-global.pre = 'http://localhost:3000'
+global.pre = 'http://localhost:3000/api'
 
 new Vue({
   el: '#app',
