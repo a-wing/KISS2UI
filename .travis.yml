@@ -11,7 +11,7 @@ cache:
     - node_modules
 
 script:
-  - sed -i 's#http://localhost:3000#/api#g' src/main.js
+  - sed -i 's#http://localhost:3000##g' src/main.js
   - sed -i 's#/dist/build.js#dist/build.js#g' index.html
   - yarn install
   - yarn build
