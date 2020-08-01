@@ -1,5 +1,10 @@
 import Vue from 'vue'
 
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+import store from './store'
+
 import axios from 'axios'
 Vue.prototype.$http = axios
 
@@ -16,7 +21,7 @@ import App from './App.vue'
 
 
 const routes = [
-  { path: '/', component: require('./overview.vue').default },
+  { path: '/', component: require('./overview2.vue').default },
   { path: '/:pkgname', component: require('./pkgdetail.vue').default }
 ]
 
@@ -24,10 +29,12 @@ const router = new VueRouter({
   routes
 })
 
-global.pre = 'http://localhost:3000/api'
+//global.pre = 'http://localhost:3000/api'
+global.pre = 'https://build.archlinuxcn.org/api'
 
 new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App)
 })
