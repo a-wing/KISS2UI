@@ -29,6 +29,11 @@ const router = new VueRouter({
   routes
 })
 
+import { setBaseURL } from './api/kiss2ugo'
+
+//setBaseURL('https://build.archlinuxcn.org')
+setBaseURL('http://localhost:22333')
+
 //global.pre = 'http://localhost:3000/api'
 global.pre = 'https://build.archlinuxcn.org/api'
 

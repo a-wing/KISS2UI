@@ -6,9 +6,6 @@ export default {
       order: 'desc'
     },
   }),
-  created() {
-    this.getLatest()
-  },
   methods: {
     handleSortChange ({name, order}) {
       this.sort = { name, order }

@@ -1,6 +1,6 @@
 <template>
   <mu-container>
-    <div v-if="!item">
+    <div v-if="!isShow">
       <loading/>
     </div>
     <div v-else>
@@ -36,6 +36,8 @@ import Base from './lib/BasePkg.vue'
 import Pkgcard from './components/pkgcard.vue'
 import Loading from './components/loading.vue'
 
+import * as v2 from './api/kiss2ugo'
+
 export default {
   data: () => ({
     columns: [
@@ -44,18 +46,29 @@ export default {
       { title: 'Building Status', name: 'status', align: 'center', sortable: true },
       { title: 'Building Time (s)', name: 'duration', align: 'center', sortable: true }
     ],
+    list: {},
   }),
   components: {
     'loading': Loading,
     'pkg-card': Pkgcard
   },
   extends: Base,
+  created() {
+    if (!this.hasItem()) {
+      v2.getPkg(this.$route.params.name).then(data => this.list = data)
+    }
+  },
   computed: {
+    isShow() {
+      return this.hasItem() ? true : (this.list.name === this.$route.params.name ? true : false)
+    },
+    rawItem() {
+      return this.hasItem() ? this.$store.state.items.filter(i => i.name === this.$route.params.name)[0] : this.list
+    },
     item() {
-      return this.$store.state.items.filter(i => i.name === this.$route.params.name).map(item => {
-        item.overview = this.getOverview(Object.values(item.log))
-        return item
-      })[0]
+      const item = this.rawItem
+      item.overview = this.getOverview(Object.values(item.log))
+      return item
     },
     logs() {
       const logs = this.item.log
@@ -74,6 +87,9 @@ export default {
     },
   },
   methods: {
+    hasItem() {
+      return this.$store.state.items.length == 0 ? false : true
+    },
     getOverview(logs) {
       return {
         "successful": logs.filter(i => i.status == "successful").length,
