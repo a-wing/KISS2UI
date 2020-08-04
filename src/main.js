@@ -22,7 +22,7 @@ import App from './App.vue'
 
 const routes = [
   { path: '/', component: require('./overview2.vue').default },
-  { path: '/:pkgname', component: require('./pkgdetail.vue').default }
+  { path: '/:name', component: require('./pkgdetail2.vue').default },
 ]
 
 const router = new VueRouter({

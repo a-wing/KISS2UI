@@ -8,7 +8,7 @@
     <div v-else>
 
       <mu-paper :z-depth="1">
-        <mu-data-table stripe :columns="columns" :data="showItems" :sort.sync="sort" @sort-change="handleSortChange" >
+        <mu-data-table stripe :columns="columns" :data="showItems" :sort.sync="sort" @sort-change="handleSortChange" @row-click=detail>
           <template v-slot="scope">
             <td>{{ scope.row.name }}</td>
             <!--<td class="is-right">{{ scope.row.subname ? scope.row.subname.join(" / ") : "" }}</td>-->
@@ -90,6 +90,9 @@ export default {
     this.$store.dispatch('getAll',this)
   },
   methods: {
+    detail(index, row, event) {
+       this.$router.push(row.name)
+    },
     handleSortChange ({name, order}) {
       this.sort = { name, order }
     },

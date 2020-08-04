@@ -1,21 +1,17 @@
 <script>
 export default {
-  data () {
-    return {
-      sort: {
-        name: '',
-        order: 'asc'
-      },
-      columns: [],
-      list: []
-    }
-  },
+  data: () => ({
+    sort: {
+      name: 'timestamp',
+      order: 'desc'
+    },
+  }),
   created() {
     this.getLatest()
   },
   methods: {
     handleSortChange ({name, order}) {
-      this.list = this.list.sort((a, b) => order === 'asc' ? a[name] - b[name] : b[name] - a[name]);
+      this.sort = { name, order }
     },
     humanFriendlyTime(time = 0) {
       return (time > 3600 ? Math.floor(time/3600) + 'h' : '')
