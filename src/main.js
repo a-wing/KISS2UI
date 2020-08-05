@@ -23,6 +23,7 @@ import App from './App.vue'
 const routes = [
   { path: '/', component: require('./overview2.vue').default },
   { path: '/:name', component: require('./pkgdetail2.vue').default },
+  { path: '/:name/logs/:timestamp', component: require('./pkglog.vue').default },
 ]
 
 const router = new VueRouter({

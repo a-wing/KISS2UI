@@ -17,3 +17,10 @@ export function getPkg(name) {
     .get()
     .json();
 }
+
+export function getPkgLog(name, timestamp) {
+  return wr.url(`/api/v2/packages/${name}/logs/${timestamp}`)
+    .get()
+    .text();
+}
+

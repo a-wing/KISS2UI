@@ -14,7 +14,7 @@
       <br/>
 
       <mu-paper :z-depth="1">
-        <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="showLog">
+        <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="showLog" @row-click=detail>
           <template v-slot="scope">
             <td class="is-right">{{ scope.row.version }}</td>
             <td class="is-right">{{ (new Date(scope.row.timestamp * 1000)).toLocaleString() }}</td>
@@ -87,6 +87,9 @@ export default {
     },
   },
   methods: {
+    detail(index, row, event) {
+      this.$router.push(`${this.$route.params.name}/logs/${row.timestamp}`)
+    },
     hasItem() {
       return this.$store.state.items.length == 0 ? false : true
     },
