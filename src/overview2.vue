@@ -13,6 +13,8 @@
             <td>{{ scope.row.name }}</td>
             <!--<td class="is-right">{{ scope.row.subname ? scope.row.subname.join(" / ") : "" }}</td>-->
             <td class="is-right">{{ scope.row.version }}
+              <!--mark the latest build wave differently in the last eight hours, Maybe 8 hours -->
+              <mu-chip v-if="(Date.now() - new Date(Number(scope.row.timestamp) * 1000)) < 19200000" color="deepOrange500" chip>new</mu-chip>
             </td>
 
             <td class="is-right">{{ scope.row.users ? scope.row.users.join(" / ") : "" }}</td>
