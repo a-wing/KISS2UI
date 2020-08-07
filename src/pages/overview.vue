@@ -35,16 +35,12 @@
 </template>
 
 <script>
+import Base from '../lib/BasePkg.vue'
 import Loading from '../components/loading.vue'
 
 export default {
   data: () => ({
-    keywords: '',
     search: '',
-    sort: {
-      name: 'timestamp',
-      order: 'desc'
-    },
     columns: [
       { title: 'Name', name: 'name', align: 'center' },
       { title: 'Version', name: 'version', align: 'center', sortable: true },
@@ -54,6 +50,7 @@ export default {
       { title: 'Duration', name: 'duration', align: 'center', sortable: true },
     ],
   }),
+  extends: Base,
   computed: {
     listItems() {
       return this.$store.state.items.map(item => {
@@ -95,20 +92,12 @@ export default {
     detail(index, row, event) {
        this.$router.push(row.name)
     },
-    handleSortChange ({name, order}) {
-      this.sort = { name, order }
-    },
     getLatest(data) {
       return Object.keys(data).reduce((a, b) => {
         return a < b ? b : a
       })
-    },
-    humanFriendlyTime(time = 0) {
-      return (time > 3600 ? Math.floor(time/3600) + 'h' : '')
-      + (time > 60 ? Math.floor((time%3600)/60) + 'm' : '')
-      + (time%3600)%60 + 's'
-    },
-  },
+    }
+  }
 }
 </script>
 
