@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import Loading from './components/loading.vue'
+import Loading from '../components/loading.vue'
 
 export default {
   data: () => ({

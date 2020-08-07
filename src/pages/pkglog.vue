@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Loading from './components/loading.vue'
-import { getPkgLog } from './api/kiss2ugo'
+import Loading from '../components/loading.vue'
+import { getPkgLog } from '../api/kiss2ugo'
 import { Terminal } from 'xterm';
 
 import 'xterm/css/xterm.css'

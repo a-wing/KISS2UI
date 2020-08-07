@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import Base from './lib/BasePkg.vue'
-import Pkgcard from './components/pkgcard.vue'
-import Loading from './components/loading.vue'
+import Base from '../lib/BasePkg.vue'
+import Pkgcard from '../components/pkgcard.vue'
+import Loading from '../components/loading.vue'
 
-import * as v2 from './api/kiss2ugo'
+import * as v2 from '../api/kiss2ugo'
 
 export default {
   data: () => ({

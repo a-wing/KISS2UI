@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import store from './store'
+import router from './router'
 
 import axios from 'axios'
 Vue.prototype.$http = axios
@@ -13,22 +14,8 @@ import 'muse-ui/dist/muse-ui.css';
 
 Vue.use(MuseUI);
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
-
 import App from './App.vue'
 
-
-const routes = [
-  { path: '/', component: require('./overview2.vue').default },
-  { path: '/:name', component: require('./pkgdetail2.vue').default },
-  { path: '/:name/logs/:timestamp', component: require('./pkglog.vue').default },
-]
-
-const router = new VueRouter({
-  routes
-})
 
 import { setBaseURL } from './api/kiss2ugo'
 
