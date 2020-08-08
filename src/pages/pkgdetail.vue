@@ -90,9 +90,6 @@ export default {
     detail(index, row, event) {
       this.$router.push(`${this.$route.params.name}/logs/${row.timestamp}`)
     },
-    hasItem() {
-      return this.$store.state.items.length == 0 ? false : true
-    },
     getOverview(logs) {
       return {
         "successful": logs.filter(i => i.status == "successful").length,

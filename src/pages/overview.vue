@@ -2,7 +2,7 @@
   <mu-container>
     <mu-text-field full-width label-float label="Input Pkgname (Support RegExp)" v-model="search"></mu-text-field>
 
-    <div v-if="!this.$store.state.items[0]">
+    <div v-if="!isShow">
       <loading/>
     </div>
     <div v-else>
@@ -13,8 +13,7 @@
             <td>{{ scope.row.name }}</td>
             <!--<td class="is-right">{{ scope.row.subname ? scope.row.subname.join(" / ") : "" }}</td>-->
             <td class="is-right">{{ scope.row.version }}
-              <!--mark the latest build wave differently in the last eight hours, Maybe 8 hours -->
-              <mu-chip v-if="(Date.now() - new Date(Number(scope.row.timestamp) * 1000)) < 19200000" color="deepOrange500" chip>new</mu-chip>
+              <mu-chip v-if="list.map(i => i.name).includes(scope.row.name)" color="deepOrange500" chip>new</mu-chip>
             </td>
 
             <td class="is-right">{{ scope.row.users ? scope.row.users.join(" / ") : "" }}</td>
@@ -38,9 +37,12 @@
 import Base from '../lib/BasePkg.vue'
 import Loading from '../components/loading.vue'
 
+import { getHotPkgs } from '../api/kiss2ugo'
+
 export default {
   data: () => ({
     search: '',
+    list: [],
     columns: [
       { title: 'Name', name: 'name', align: 'center' },
       { title: 'Version', name: 'version', align: 'center', sortable: true },
@@ -52,8 +54,14 @@ export default {
   }),
   extends: Base,
   computed: {
+    isShow() {
+      return this.hasItem() ? true : (this.list.length == 0 ? false : true)
+    },
+    rawItem() {
+      return this.hasItem() ? this.$store.state.items : this.list
+    },
     listItems() {
-      return this.$store.state.items.map(item => {
+      return this.rawItem.map(item => {
         item.timestamp = this.getLatest(item.log)
         const log = item.log[item.timestamp]
         item.duration = log.duration
@@ -86,6 +94,7 @@ export default {
     'loading': Loading,
   },
   created() {
+    getHotPkgs().then(data => this.list = data)
     this.$store.dispatch('getAll',this)
   },
   methods: {

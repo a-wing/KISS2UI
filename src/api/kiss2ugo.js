@@ -6,6 +6,12 @@ export function setBaseURL(url = '') {
   wr = wr.url(url.replace(/\/$/, ''), true);
 }
 
+export function getHotPkgs() {
+  return wr.url('/api/v2/hot/packages')
+    .get()
+    .json();
+}
+
 export function getPkgs() {
   return wr.url('/api/v2/packages')
     .get()
