@@ -5,14 +5,13 @@
 > vue.js + babel 7 + webpack 4 + muse-ui 3
 
 
+Build
 
-手动构建：
 ```sh
-yarn install
+npm install
 
-# 开发测试看效果
-yarn dev
+npm run dev
 
-yarn build
+npm run build
 ```
 
