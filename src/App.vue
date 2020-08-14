@@ -1,13 +1,6 @@
 <template>
   <div id="app">
-    <!--img src="./assets/logo.png"-->
-    <mu-appbar style="width: 100%;" color="primary">
-      {{ msg }}
-      <mu-menu slot="right">
-        <mu-button flat to="/" >Arch Linux CN</mu-button>
-      </mu-menu>
-    </mu-appbar>
-
+    <headers :color="color"></headers>
     <br/>
 
     <router-view></router-view>
@@ -28,10 +21,16 @@
 </template>
 
 <script>
+import Headers from './components/headers.vue'
+
 export default {
   name: 'app',
+  components: {
+    'headers': Headers,
+  },
   data () {
     return {
+      color: 'is-success',
       msg: 'Keep It Simple, Stupid To You UI'
     }
   }
