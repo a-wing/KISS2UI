@@ -119,16 +119,8 @@ export default {
     this.$store.dispatch('level', 'is-light')
   },
   methods: {
-    mapStatus(status) {
-      let map = {
-        "successful": "is-success",
-        "failed": "is-danger",
-        "skipped": "is-warn"
-      }
-      return map[status] || "is-black"
-    },
     detail(row) {
-       this.$router.push(row.name)
+      this.$router.push(row.name)
     },
     getLatest(data) {
       return Object.keys(data).reduce((a, b) => {

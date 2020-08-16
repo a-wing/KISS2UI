@@ -12,21 +12,49 @@
       <mu-alert v-else color="error" ></mu-alert>
 
       <br/>
+      <b-table :data="showLog" :mobile-cards="true" @click="detail" striped>
 
-      <mu-paper :z-depth="1">
-        <mu-data-table stripe :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="showLog" @row-click=detail>
-          <template v-slot="scope">
-            <td class="is-right">{{ scope.row.version }}</td>
-            <td class="is-right">{{ (new Date(scope.row.timestamp * 1000)).toLocaleString() }}</td>
-            <td class="is-right">
-              <mu-chip v-if="scope.row.status == 'successful'" color="green" chip>successful</mu-chip>
-              <mu-chip v-else-if="scope.row.status == 'failed'" color="red" chip>failed</mu-chip>
-              <mu-chip v-else color="orange" chip>skiped</mu-chip>
-            </td>
-            <td class="is-right">{{ humanFriendlyTime(scope.row.duration) }}</td>
-          </template>
-        </mu-data-table>
-      </mu-paper>
+        <template v-slot="props">
+          <b-table-column field="version" label="Version" numeric sortable>
+            {{ props.row.version }}
+          </b-table-column>
+
+          <b-table-column field="timestamp" label="Date" centered sortable>
+            <b-tag :type="mapStatus(props.row.status)">
+              {{ (new Date(Number(props.row.timestamp) * 1000)).toLocaleString() }}
+            </b-tag>
+          </b-table-column>
+
+          <b-table-column field="status" label="Status" centered sortable>
+            <b-tag :type="mapStatus(props.row.status)" rounded>
+              {{ props.row.status }}
+            </b-tag>
+          </b-table-column>
+
+          <b-table-column field="duration" label="Duration" numeric sortable>
+            <span>
+              {{ humanFriendlyTime(props.row.duration) }}
+            </span>
+          </b-table-column>
+
+        </template>
+
+        <template slot="empty">
+          <section class="section">
+            <div class="content has-text-grey has-text-centered">
+              <p>
+              <b-icon
+                icon="emoticon-sad"
+                size="is-large">
+              </b-icon>
+              </p>
+              <p>Nothing here.</p>
+            </div>
+          </section>
+        </template>
+
+      </b-table>
+
     </div>
   </mu-container>
 </template>
@@ -96,7 +124,7 @@ export default {
     },
   },
   methods: {
-    detail(index, row, event) {
+    detail(row) {
       this.$router.push(`${this.$route.params.name}/logs/${row.timestamp}`)
     },
     getLevel() {

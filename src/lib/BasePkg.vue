@@ -7,6 +7,14 @@ export default {
     },
   }),
   methods: {
+    mapStatus(status) {
+      let map = {
+        "successful": "is-success",
+        "failed": "is-danger",
+        "skipped": "is-warn"
+      }
+      return map[status] || "is-black"
+    },
     handleSortChange ({name, order}) {
       this.sort = { name, order }
     },
