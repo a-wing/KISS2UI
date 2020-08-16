@@ -11,6 +11,7 @@ Vue.use(MuseUI);
 import {
   Navbar,
   Table,
+  Icon,
   Tag
 } from 'buefy'
 import 'buefy/dist/buefy.css'
@@ -18,6 +19,7 @@ import 'buefy/dist/buefy.css'
 Vue.use(Navbar)
 Vue.use(Table)
 Vue.use(Tag)
+Vue.use(Icon)
 
 
 import App from './App.vue'

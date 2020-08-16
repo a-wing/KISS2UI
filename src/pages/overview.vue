@@ -6,7 +6,8 @@
       <loading/>
     </div>
     <div v-else>
-      <b-table :data="showItems" :mobile-cards="true" @click="detail" striped>
+      <div class="container">
+      <b-table :data="showItems" :mobile-cards="true" @click="detail" paginated striped>
 
         <template v-slot="props">
           <b-table-column field="name" label="Name" sortable>
@@ -57,6 +58,7 @@
         </template>
 
       </b-table>
+    </div>
     </div>
   </mu-container>
 </template>

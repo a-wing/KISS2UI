@@ -12,7 +12,7 @@
       <mu-alert v-else color="error" ></mu-alert>
 
       <br/>
-      <b-table :data="showLog" :mobile-cards="true" @click="detail" striped>
+      <b-table :data="showLog" :mobile-cards="true" @click="detail" paginated striped>
 
         <template v-slot="props">
           <b-table-column field="version" label="Version" numeric sortable>
