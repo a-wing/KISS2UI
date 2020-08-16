@@ -6,12 +6,6 @@
     <div v-else>
       <pkg-card :pkg=item ></pkg-card>
 
-      <mu-alert v-if="(item.overview.successful + item.overview.skipped) / item.overview.total >= 0.9" color="success"></mu-alert>
-      <mu-alert v-else-if="(item.overview.successful + item.overview.skipped) / item.overview.total >= 0.8" color="info" ></mu-alert>
-      <mu-alert v-else-if="(item.overview.successful + item.overview.skipped) / item.overview.total >= 0.6" color="warning"></mu-alert>
-      <mu-alert v-else color="error" ></mu-alert>
-
-      <br/>
       <b-table :data="showLog" :mobile-cards="true" @click="detail" paginated striped>
 
         <template v-slot="props">
