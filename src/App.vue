@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <headers :color="color"></headers>
+    <headers :color="this.$store.state.level"></headers>
     <br/>
 
     <router-view></router-view>
@@ -30,7 +30,6 @@ export default {
   },
   data () {
     return {
-      color: 'is-success',
       msg: 'Keep It Simple, Stupid To You UI'
     }
   }

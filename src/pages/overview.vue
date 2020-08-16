@@ -116,6 +116,7 @@ export default {
   created() {
     getHotPkgs().then(data => this.list = data)
     this.$store.dispatch('getAll',this)
+    this.$store.dispatch('level', 'is-light')
   },
   methods: {
     mapStatus(status) {

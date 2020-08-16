@@ -7,6 +7,7 @@ import * as v2 from './api/kiss2ugo'
 export default new Vuex.Store({
   state:{
     items:[],
+    level: 'is-success',
   },
   getters:{
 
@@ -14,6 +15,9 @@ export default new Vuex.Store({
   mutations:{
     updateItems(state, items) {
       state.items = items
+    },
+    updateLevel(state, level) {
+      state.level = level
     },
   },
   actions:{
@@ -23,6 +27,9 @@ export default new Vuex.Store({
         items = data
         commit("updateItems", items)
       })
+    },
+    level({commit, state}, level) {
+      commit("updateLevel", level)
     },
   },
 })
