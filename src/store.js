@@ -18,6 +18,7 @@ export default new Vuex.Store({
   },
   actions:{
     getAll({commit, state}, items) {
+      if (state.items.length != 0) { return }
       v2.getPkgs().then(data => {
         items = data
         commit("updateItems", items)
