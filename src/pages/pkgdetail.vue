@@ -57,6 +57,15 @@ export default {
     if (!this.hasItem()) {
       v2.getPkg(this.$route.params.name).then(data => this.list = data)
     }
+
+    try {
+      this.setLevel(this.getLevel())
+    } catch(err) {
+      //console.log(err)
+    }
+  },
+  updated() {
+    this.setLevel(this.getLevel())
   },
   computed: {
     isShow() {
@@ -89,6 +98,23 @@ export default {
   methods: {
     detail(index, row, event) {
       this.$router.push(`${this.$route.params.name}/logs/${row.timestamp}`)
+    },
+    getLevel() {
+      let mapLevel = {
+        9: 'is-success',
+        8: 'is-info',
+        6: 'is-warning',
+        1: 'is-danger',
+      }
+
+      let l = (this.item.overview.successful + this.item.overview.skipped) / this.item.overview.total
+      for ( let key of Object.keys(mapLevel).sort((a, b) => b - a ) ) {
+        if (l * 10 >= key) { return mapLevel[key] }
+      }
+      return 'is-black'
+    },
+    setLevel(level) {
+      this.$store.dispatch('level', level)
     },
     getOverview(logs) {
       return {
