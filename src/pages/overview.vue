@@ -6,29 +6,57 @@
       <loading/>
     </div>
     <div v-else>
+      <b-table :data="showItems" :mobile-cards="true" @click="detail" striped>
 
-      <mu-paper :z-depth="1">
-        <mu-data-table stripe :columns="columns" :data="showItems" :sort.sync="sort" @sort-change="handleSortChange" @row-click=detail>
-          <template v-slot="scope">
-            <td>{{ scope.row.name }}</td>
-            <!--<td class="is-right">{{ scope.row.subname ? scope.row.subname.join(" / ") : "" }}</td>-->
-            <td class="is-right">{{ scope.row.version }}
-              <mu-chip v-if="list.map(i => i.name).includes(scope.row.name)" color="deepOrange500" chip>new</mu-chip>
-            </td>
+        <template v-slot="props">
+          <b-table-column field="name" label="Name" sortable>
+            {{ props.row.name }}
+          </b-table-column>
 
-            <td class="is-right">{{ scope.row.users ? scope.row.users.join(" / ") : "" }}</td>
-            <!-- new Date(Unix timestamp * 1000) -->
-            <td class="is-right">{{ (new Date(Number(scope.row.timestamp) * 1000)).toLocaleString()  }}</td>
-            <td class="is-right">
-              <mu-chip v-if="scope.row.status == 'successful'" color="green" chip>successful</mu-chip>
-              <mu-chip v-else-if="scope.row.status == 'failed'" color="red" chip>failed</mu-chip>
-              <mu-chip v-else color="orange" chip>skiped</mu-chip>
-            </td>
-            <td class="is-right">{{ humanFriendlyTime(scope.row.duration) }}</td>
-          </template>
-        </mu-data-table>
-      </mu-paper>
+          <b-table-column field="version" label="Version" numeric sortable>
+            {{ props.row.version }}
+            <b-tag v-if="list.map(i => i.name).includes(props.row.name)" type="is-danger" rounded>*</b-tag>
+          </b-table-column>
 
+          <b-table-column field="users" label="Users" centered sortable>
+            {{ props.row.users ? props.row.users.join(" / ") : "" }}
+          </b-table-column>
+
+          <b-table-column field="timestamp" label="Date" centered sortable>
+            <b-tag :type="mapStatus(props.row.status)">
+              {{ (new Date(Number(props.row.timestamp) * 1000)).toLocaleString() }}
+            </b-tag>
+          </b-table-column>
+
+          <b-table-column field="status" label="Status" centered sortable>
+            <b-tag :type="mapStatus(props.row.status)" rounded>
+              {{ props.row.status }}
+            </b-tag>
+          </b-table-column>
+
+          <b-table-column field="duration" label="Duration" numeric sortable>
+            <span>
+              {{ humanFriendlyTime(props.row.duration) }}
+            </span>
+          </b-table-column>
+
+        </template>
+
+        <template slot="empty">
+          <section class="section">
+            <div class="content has-text-grey has-text-centered">
+              <p>
+              <b-icon
+                icon="emoticon-sad"
+                size="is-large">
+              </b-icon>
+              </p>
+              <p>Nothing here.</p>
+            </div>
+          </section>
+        </template>
+
+      </b-table>
     </div>
   </mu-container>
 </template>
@@ -43,14 +71,6 @@ export default {
   data: () => ({
     search: '',
     list: [],
-    columns: [
-      { title: 'Name', name: 'name', align: 'center' },
-      { title: 'Version', name: 'version', align: 'center', sortable: true },
-      { title: 'User', name: 'user', align: 'center', sortable: true },
-      { title: 'Latest Build Time', name: 'timestamp', align: 'center', sortable: true },
-      { title: 'Status', name: 'status', align: 'center', sortable: true },
-      { title: 'Duration', name: 'duration', align: 'center', sortable: true },
-    ],
   }),
   extends: Base,
   computed: {
@@ -98,7 +118,15 @@ export default {
     this.$store.dispatch('getAll',this)
   },
   methods: {
-    detail(index, row, event) {
+    mapStatus(status) {
+      let map = {
+        "successful": "is-success",
+        "failed": "is-danger",
+        "skipped": "is-warn"
+      }
+      return map[status] || "is-black"
+    },
+    detail(row) {
        this.$router.push(row.name)
     },
     getLatest(data) {

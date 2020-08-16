@@ -8,10 +8,16 @@ import 'muse-ui/dist/muse-ui.css';
 
 Vue.use(MuseUI);
 
-import { Navbar } from 'buefy'
+import {
+  Navbar,
+  Table,
+  Tag
+} from 'buefy'
 import 'buefy/dist/buefy.css'
 
 Vue.use(Navbar)
+Vue.use(Table)
+Vue.use(Tag)
 
 
 import App from './App.vue'
