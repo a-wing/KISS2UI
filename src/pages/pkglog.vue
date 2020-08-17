@@ -4,7 +4,13 @@
       <loading/>
     </div>
     <mu-paper :z-depth="1">
+
+    <div v-show="ok">
       <div ref="terminal"></div>
+    </div>
+    <div v-show="!ok">
+      {{ list }}
+    </div>
     </mu-paper>
   </mu-container>
 </template>
@@ -19,6 +25,7 @@ import 'xterm/css/xterm.css'
 export default {
   data: () => ({
     list: "",
+    ok: true,
   }),
   components: {
     'loading': Loading,
@@ -34,6 +41,10 @@ export default {
       });
       term.open(this.$refs.terminal);
       term.write(data)
+    })
+    .catch(err => {
+      this.list = err
+      this.ok = false
     })
   },
 }
