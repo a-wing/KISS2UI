@@ -9,39 +9,37 @@
       <div class="container">
       <b-table :data="showItems" :mobile-cards="true" @click="detail" paginated striped>
 
-        <template v-slot="props">
-          <b-table-column field="name" label="Name" sortable>
-            {{ props.row.name }}
-          </b-table-column>
+        <b-table-column field="name" label="Name" sortable #default="props">
+          {{ props.row.name }}
+        </b-table-column>
 
-          <b-table-column field="version" label="Version" numeric sortable>
-            {{ props.row.version }}
-            <b-tag v-if="list.map(i => i.name).includes(props.row.name)" type="is-danger" rounded>*</b-tag>
-          </b-table-column>
+        <b-table-column field="version" label="Version" numeric sortable #default="props">
+          {{ props.row.version }}
+          <b-tag v-if="list.map(i => i.name).includes(props.row.name)" type="is-danger" rounded>*</b-tag>
+        </b-table-column>
 
-          <b-table-column field="users" label="Users" centered sortable>
-            {{ props.row.users ? props.row.users.join(" / ") : "" }}
-          </b-table-column>
+        <b-table-column field="users" label="Users" centered sortable #default="props">
+          {{ props.row.users ? props.row.users.join(" / ") : "" }}
+        </b-table-column>
 
-          <b-table-column field="timestamp" label="Date" centered sortable>
-            <b-tag :type="mapStatus(props.row.status)">
-              {{ (new Date(Number(props.row.timestamp) * 1000)).toLocaleString() }}
-            </b-tag>
-          </b-table-column>
+        <b-table-column field="timestamp" label="Date" centered sortable #default="props">
+          <b-tag :type="mapStatus(props.row.status)">
+            {{ (new Date(Number(props.row.timestamp) * 1000)).toLocaleString() }}
+          </b-tag>
+        </b-table-column>
 
-          <b-table-column field="status" label="Status" centered sortable>
-            <b-tag :type="mapStatus(props.row.status)" rounded>
-              {{ props.row.status }}
-            </b-tag>
-          </b-table-column>
+        <b-table-column field="status" label="Status" centered sortable #default="props">
+          <b-tag :type="mapStatus(props.row.status)" rounded>
+            {{ props.row.status }}
+          </b-tag>
+        </b-table-column>
 
-          <b-table-column field="duration" label="Duration" numeric sortable>
-            <span>
-              {{ humanFriendlyTime(props.row.duration) }}
-            </span>
-          </b-table-column>
+        <b-table-column field="duration" label="Duration" numeric sortable #default="props">
+          <span>
+            {{ humanFriendlyTime(props.row.duration) }}
+          </span>
+        </b-table-column>
 
-        </template>
 
         <template slot="empty">
           <section class="section">
