@@ -10,6 +10,7 @@ Vue.use(MuseUI);
 
 import {
   Autocomplete,
+  Loading,
   Navbar,
   Table,
   Pagination,
@@ -19,6 +20,7 @@ import {
 import 'buefy/dist/buefy.css'
 
 Vue.use(Autocomplete)
+Vue.use(Loading)
 Vue.use(Navbar)
 Vue.use(Table)
 Vue.use(Pagination)
