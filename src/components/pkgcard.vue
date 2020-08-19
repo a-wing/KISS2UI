@@ -1,60 +1,65 @@
 <template>
-  <mu-container>
+  <div class="box">
 
-    <h1>{{ pkg.name }}</h1>
+    <div class="item">
+      <h3>
+        {{ pkg.name }}
+      </h3>
 
-    <h3>{{ pkg.subname ? pkg.subname.join(" / ") : "" }}</h3>
-    <mu-list>
+      <div v-if="pkg.subname">
+        <b-taglist>
+          <div v-for="item in pkg.subname">
+            <b-tag type="is-info">
+              {{ item }}
+            </b-tag>
+            <div> </div>
+          </div>
+        </b-taglist>
+      </div>
 
-      <mu-list-item>
-        <mu-list-item-content>
-          <mu-list-item-title>Version</mu-list-item-title>
-        </mu-list-item-content>
-        </mu-list-item-action>
-        <mu-badge :content="pkg.version" color="teal"></mu-badge>
-        </mu-list-item-action>
-      </mu-list-item>
+    </div>
+    <br/>
 
-      <!--
-      <mu-list-item>
-        <mu-list-item-content>
-          <mu-list-item-title>Latest build time</mu-list-item-title>
-        </mu-list-item-content>
-        </mu-list-item-action>
-        <mu-badge :content="(new Date(pkg.latest_build_time)).toLocaleString()" color="brown"></mu-badge>
-        </mu-list-item-action>
-      </mu-list-item>
-      -->
+    <div class="item">
+      <h3>
+        Version
+      </h3>
+      <span class="tag is-dark">
+        {{ pkg.version }}
+      </span>
+    </div>
+    <br/>
 
-      <mu-list-item>
-        <mu-list-item-content>
-          <mu-list-item-title>Successful Counts</mu-list-item-title>
-        </mu-list-item-content>
-        </mu-list-item-action>
-        <mu-badge :content="String(pkg.overview.successful)" color="success"></mu-badge>
-        </mu-list-item-action>
-      </mu-list-item>
+    <div class="item">
+      <h3>
+        Successful
+      </h3>
+      <span class="tag is-success">
+        {{ pkg.overview.successful }}
+      </span>
+    </div>
+    <br/>
 
-      <mu-list-item>
-        <mu-list-item-content>
-          <mu-list-item-title>Failed Counts</mu-list-item-title>
-        </mu-list-item-content>
-        </mu-list-item-action>
-        <mu-badge :content="String(pkg.overview.failed)" color="error"></mu-badge>
-        </mu-list-item-action>
-      </mu-list-item>
+    <div class="item">
+      <h3>
+        Failed
+      </h3>
+      <span class="tag is-danger">
+        {{ pkg.overview.failed }}
+      </span>
+    </div>
+    <br/>
 
-      <mu-list-item>
-        <mu-list-item-content>
-          <mu-list-item-title>Skiped Counts</mu-list-item-title>
-        </mu-list-item-content>
-        </mu-list-item-action>
-        <mu-badge :content="String(pkg.overview.skipped)" color="warning"></mu-badge>
-        </mu-list-item-action>
-      </mu-list-item>
+    <div class="item">
+      <h3>
+        Skipped
+      </h3>
+      <span class="tag is-warning">
+        {{ pkg.overview.skipped }}
+      </span>
+    </div>
 
-    </mu-list>
-  </mu-container>
+  </div>
 </template>
 
 <script>
@@ -67,4 +72,17 @@ export default {
   }
 }
 </script>
+
+<style scope>
+.box {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+</style>
 
