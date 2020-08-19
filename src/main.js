@@ -9,6 +9,7 @@ import 'muse-ui/dist/muse-ui.css';
 Vue.use(MuseUI);
 
 import {
+  Autocomplete,
   Navbar,
   Table,
   Pagination,
@@ -17,6 +18,7 @@ import {
 } from 'buefy'
 import 'buefy/dist/buefy.css'
 
+Vue.use(Autocomplete)
 Vue.use(Navbar)
 Vue.use(Table)
 Vue.use(Pagination)

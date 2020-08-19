@@ -1,6 +1,17 @@
 <template>
   <mu-container>
-    <mu-text-field full-width label-float label="Input Pkgname (Support RegExp)" v-model="search"></mu-text-field>
+    <b-autocomplete
+      rounded
+      v-model="search"
+      placeholder="Input Name Or SubName"
+      :data="filteredDataArray"
+      icon="magnify"
+      clearable
+      @select="option => selected = option">
+      <template slot="empty">No results found</template>
+    </b-autocomplete>
+
+    <br/>
 
     <div v-if="!isShow">
       <loading/>
@@ -104,6 +115,9 @@ export default {
           )
         )
       )
+    },
+    filteredDataArray() {
+      return this.filteredItems.map(i => i.name)
     },
     showItems() {
       const { name, order } = this.sort
