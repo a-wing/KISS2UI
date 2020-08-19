@@ -1,9 +1,8 @@
 <template>
-  <mu-container>
+  <div class="container">
     <div v-if="list == ''">
       <loading/>
     </div>
-    <mu-paper :z-depth="1">
 
     <div v-show="ok">
       <div ref="terminal"></div>
@@ -11,8 +10,7 @@
     <div v-show="!ok">
       {{ list }}
     </div>
-    </mu-paper>
-  </mu-container>
+  </div>
 </template>
 
 <script>
