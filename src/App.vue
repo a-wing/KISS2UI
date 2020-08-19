@@ -3,20 +3,20 @@
     <headers :color="this.$store.state.level"></headers>
     <br/>
 
-    <router-view></router-view>
+    <div class="container">
+      <router-view></router-view>
+    </div>
 
     <br/>
-    <mu-flex justify-content="center" >
-      <mu-badge color="transparent">
-        Copyright: 2018 - 2020 Arch Linux CN
-      </mu-badge>
-    <br/>
-    </mu-flex>
-    <mu-flex justify-content="center" >
-    <a style="color: #2196f3" href="https://github.com/a-wing/kiss2ugo">
-      Github
-    </a>
-    </mu-flex>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+        <strong>K.I.S.S 2 U</strong> Copyright: 2018 - 2020  <a href="archlinuxcn">Arch Linux CN</a>
+        <a href="https://github.com/a-wing/kiss2ugo">Github</a>
+        </p>
+      </div>
+    </footer>
   </div>
 </template>
 
