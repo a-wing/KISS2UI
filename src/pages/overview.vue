@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <b-autocomplete
+      ref="search"
       rounded
       v-model="search"
       placeholder="Input Name Or SubName"
@@ -131,6 +132,9 @@ export default {
     getHotPkgs().then(data => this.list = data)
     this.$store.dispatch('getAll',this)
     this.$store.dispatch('level', 'is-light')
+  },
+  mounted() {
+    this.$refs.search.focus()
   },
   methods: {
     detail(row) {
