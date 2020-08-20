@@ -1,5 +1,5 @@
 <template>
-  <mu-container>
+  <div class="container">
     <div v-if="!isShow">
       <loading/>
     </div>
@@ -47,7 +47,7 @@
       </b-table>
 
     </div>
-  </mu-container>
+  </div>
 </template>
 
 <script>

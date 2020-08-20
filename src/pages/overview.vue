@@ -1,5 +1,5 @@
 <template>
-  <mu-container>
+  <div class="container">
     <b-autocomplete
       rounded
       v-model="search"
@@ -69,7 +69,7 @@
       </b-table>
     </div>
     </div>
-  </mu-container>
+  </div>
 </template>
 
 <script>
