@@ -7,8 +7,11 @@ import {
   Autocomplete,
   Loading,
   Navbar,
+  Field,
+  Button,
   Table,
   Pagination,
+  Input,
   Icon,
   Tag
 } from 'buefy'
@@ -17,10 +20,13 @@ import 'buefy/dist/buefy.css'
 Vue.use(Autocomplete)
 Vue.use(Loading)
 Vue.use(Navbar)
+Vue.use(Field)
+Vue.use(Button)
 Vue.use(Table)
 Vue.use(Pagination)
 Vue.use(Tag)
 Vue.use(Icon)
+Vue.use(Input)
 
 
 import App from './App.vue'
