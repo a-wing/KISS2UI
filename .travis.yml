@@ -7,7 +7,6 @@ addons:
 
 script:
   - sed -i 's#http://localhost:22333#https://build.archlinuxcn.org#g' src/main.js
-  - sed -i 's#/dist/build.js#dist/build.js#g' index.html
   - npm install
   - npm run build
 
