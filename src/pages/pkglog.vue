@@ -16,8 +16,20 @@
     <b-field label="Search..." :label-position="labelPosition" grouped>
       <b-input placeholder="Search..." type="search" v-model="search" @input="next" @keyup.enter.native="next" @keyup.up.native="prev" @keyup.down.native="next"></b-input>
       <p class="control">
-      <b-button class="button is-info" @click="prev">P</b-button>
-      <b-button class="button is-info" @click="next">N</b-button>
+      <b-button class="button is-info" @click="prev">
+        <b-icon
+          pack="fas"
+          icon="angle-up"
+          size="is-small">
+        </b-icon>
+      </b-button>
+      <b-button class="button is-info" @click="next">
+        <b-icon
+          pack="fas"
+          icon="angle-down"
+          size="is-small">
+        </b-icon>
+      </b-button>
       </p>
     </b-field>
   </div>

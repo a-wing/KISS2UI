@@ -6,7 +6,7 @@
       v-model="search"
       placeholder="Input Name Or SubName"
       :data="filteredDataArray"
-      icon="magnify"
+      icon="search"
       clearable
       @select="option => selected = option">
       <template slot="empty">No results found</template>
