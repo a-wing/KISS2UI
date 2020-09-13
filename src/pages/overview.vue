@@ -4,7 +4,7 @@
       ref="search"
       rounded
       v-model="search"
-      placeholder="Input Name Or SubName"
+      placeholder="Input Name Or SubName Or User"
       :data="filteredDataArray"
       icon="search"
       clearable
@@ -112,6 +112,10 @@ export default {
           || (
             i.subname
               ? i.subname.filter(n => n.toLowerCase().includes(lowerCaseSearch)).length != 0
+              : false
+          ) || (
+            i.users
+              ? i.users.filter(u => u.toLowerCase().includes(lowerCaseSearch)).length != 0
               : false
           )
         )
